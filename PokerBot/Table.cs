@@ -57,7 +57,7 @@ namespace PokerBot
             {
                 if (Turn == null)
                     return new List<Card>(Flop);
-                else   
+                else
                 {
                     if (River == null)
                         return new List<Card>(Flop) { Turn };
@@ -100,6 +100,17 @@ namespace PokerBot
         }
 
         /// <summary>
+        /// Add flop cards
+        /// </summary>
+        /// <param name="x">First card</param>
+        /// <param name="y">Second card</param>
+        /// <param name="z">Third card</param>
+        public void AddFlop(Card x, Card y, Card z)
+        {
+            AddFlop(x.Suit, x.Rank, y.Suit, y.Rank, z.Suit, z.Rank);
+        }
+
+        /// <summary>
         /// Add turn card
         /// </summary>
         /// <param name="suit">Suit of card</param>
@@ -113,6 +124,15 @@ namespace PokerBot
         }
 
         /// <summary>
+        /// Add turn card
+        /// </summary>
+        /// <param name="card">Card</param>
+        public void AddTurn(Card card)
+        {
+            AddTurn(card.Suit, card.Rank);
+        }
+
+        /// <summary>
         /// Add river card
         /// </summary>
         /// <param name="suit">Suit of card</param>
@@ -123,6 +143,15 @@ namespace PokerBot
                 River = new Card(suit, rank, Position.River);
             else
                 throw new Exception("Invalid state");
+        }
+
+        /// <summary>
+        /// Add river card
+        /// </summary>
+        /// <param name="card">Card</param>
+        public void AddRiver(Card card)
+        {
+            AddRiver(card.Suit, card.Rank);
         }
     }
 }

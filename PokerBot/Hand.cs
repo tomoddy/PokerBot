@@ -1,4 +1,5 @@
 ﻿using PokerBot.Enums;
+using PokerBot.Hands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ namespace PokerBot
     public class Hand
     {
         // Constants
-        private const int HAND_VARIATIONS = 7 - 4;
         private const int SUIT_VARIATIONS = 13 - 5;
         private const int SEQUENCE = 5;
         private const int FOAK = 4;
@@ -62,7 +62,7 @@ namespace PokerBot
 
                 foreach (Suit suit in Suits)
                 {
-                    for (int i = 0; i < HAND_VARIATIONS; i++)
+                    for (int i = 0; i <= Cards.Count - SEQUENCE; i++)
                     {
                         for (int j = 0; j < SUIT_VARIATIONS; j++)
                         {
@@ -93,7 +93,7 @@ namespace PokerBot
                 return false;
             }
         }
-        
+
         /// <summary>
         /// Full house
         /// </summary>
@@ -105,7 +105,7 @@ namespace PokerBot
                     return false;
 
                 Rank threeRank = 0;
-                List<Rank> ranks = new List<Rank>(Ranks);
+                List<Rank> ranks = new(Ranks);
 
                 foreach (Rank rank in ranks)
                 {
@@ -160,7 +160,7 @@ namespace PokerBot
                 if (Cards.Count < SEQUENCE)
                     return false;
 
-                for (int i = 0; i < HAND_VARIATIONS; i++)
+                for (int i = 0; i <= Cards.Count - SEQUENCE; i++)
                 {
                     for (int j = 0; j < SUIT_VARIATIONS; j++)
                     {
@@ -202,7 +202,7 @@ namespace PokerBot
                     return false;
 
                 Rank pairRank = 0;
-                List<Rank> ranks = new List<Rank>(Ranks);
+                List<Rank> ranks = new(Ranks);
 
                 foreach (Rank rank in ranks)
                 {
@@ -247,35 +247,54 @@ namespace PokerBot
             }
         }
 
-        public Ranking Ranking
+        public IRanking Ranking
         {
             get
             {
                 if (RoyalFlush)
-                    return Ranking.RoyalFlush;
+                    return new RoyalFlush();
                 else if (StraightFlush)
-                    return Ranking.StraightFlush;
+                    return new StraightFlush();
                 else if (FourOfAKind)
-                    return Ranking.FourOfAKind;
+                    return new FourOfAKind();
                 else if (FullHouse)
-                    return Ranking.FullHouse;
+                    return new FullHouse();
                 else if (Flush)
-                    return Ranking.Flush;
+                    return new Flush();
                 else if (Straight)
-                    return Ranking.Straight;
+                    return new Straight();
                 else if (ThreeOfAKind)
-                    return Ranking.ThreeOfAKind;
+                    return new ThreeOfAKind();
                 else if (TwoPair)
-                    return Ranking.TwoPair;
+                    return new TwoPair();
                 else if (Pair)
-                    return Ranking.Pair;
+                    return new Pair();
                 else
-                    return Ranking.HighCard;
+                    return new HighCard();
             }
         }
 
         /// <summary>
         /// Default constructor
+        /// </summary>
+        /// <param name="player">Cards from player</param>
+        /// <param name="table">Cards from table</param>
+        public Hand(Player player, Table table)
+        {
+            Tuple<Card, Card> hand = player.GetHand();
+            Cards = new List<Card>
+            {
+                hand.Item1,
+                hand.Item2
+            };
+            Cards.AddRange(table.Cards);
+            Cards = Cards.OrderBy(card => card.Rank).ThenBy(card => card.Suit).ToList();
+            Ranks = Cards.OrderBy(card => card.Rank).Select(card => card.Rank).ToList();
+            Suits = Cards.OrderBy(card => card.Suit).Select(card => card.Suit).ToList();
+        }
+
+        /// <summary>
+        /// Secondary constructor
         /// </summary>
         /// <param name="player">Cards from player</param>
         /// <param name="table">Cards from table</param>
@@ -309,7 +328,7 @@ namespace PokerBot
         /// <param name="x">First list</param>
         /// <param name="y">Second list</param>
         /// <returns>True if equal, false otherwise</returns>
-        private bool Compare(List<Card> x, List<Card> y)
+        private static bool Compare(List<Card> x, List<Card> y)
         {
             return Enumerable.SequenceEqual(x, y, new CardsComparer());
         }
@@ -319,9 +338,9 @@ namespace PokerBot
         /// </summary>
         /// <param name="j">Start card value</param>
         /// <returns>List of ranks</returns>
-        private List<Rank> GenerateStraight(int j)
+        private static List<Rank> GenerateStraight(int j)
         {
-            List<Rank> retVal = new List<Rank>();
+            List<Rank> retVal = new();
             for (int i = j + 2; i <= j + 6; i++)
                 retVal.Add((Rank)i);
             return retVal;
@@ -333,9 +352,9 @@ namespace PokerBot
         /// <param name="j">Start card value</param>
         /// <param name="suit">Flush suit</param>
         /// <returns>List of cards</returns>
-        private List<Card> GenerateStraightFlush(int j, Suit suit)
+        private static List<Card> GenerateStraightFlush(int j, Suit suit)
         {
-            List<Card> retVal = new List<Card>();
+            List<Card> retVal = new();
             for (int i = j + 2; i <= j + 6; i++)
                 retVal.Add(new Card(suit, (Rank)i, Position.Null));
             return retVal;

@@ -3,7 +3,7 @@
     /// <summary>
     /// Ranking enum
     /// </summary>
-    public enum Ranking
+    public enum Strength
     { 
         RoyalFlush = 9,
         StraightFlush = 8,

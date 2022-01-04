@@ -1,5 +1,4 @@
-﻿using PokerBot.Enums;
-using PokerBot.Money;
+﻿using PokerBot.Money;
 using System;
 
 namespace PokerBot
@@ -27,7 +26,7 @@ namespace PokerBot
         /// <summary>
         /// Cards in hand of player
         /// </summary>
-        public Tuple<Card, Card> Hand { get; private set; }
+        private Tuple<Card, Card> Cards { get; set; }
 
         /// <summary>
         /// Default constructor
@@ -39,20 +38,29 @@ namespace PokerBot
         {
             Id = id;
             Name = name;
-            Hand = null;
+            Cards = null;
             Wallet = new Wallet(stack);
+        }
+
+        /// <summary>
+        /// Getter for hand
+        /// </summary>
+        /// <returns>Hand tuple</returns>
+        public Tuple<Card, Card> GetHand()
+        {
+            return Cards;
         }
 
         /// <summary>
         /// Give player a card
         /// </summary>
         /// <param name="card">Card to give</param>
-        public void Give(Card card)
+        public void GiveCard(Card card)
         {
-            if (Hand == null)
-                Hand = new Tuple<Card, Card>(card, null);
-            else if (Hand.Item2 == null)
-                Hand = new Tuple<Card, Card>(Hand.Item1, card);
+            if (Cards == null)
+                Cards = new Tuple<Card, Card>(card, null);
+            else if (Cards.Item2 == null)
+                Cards = new Tuple<Card, Card>(Cards.Item1, card);
             else
                 throw new Exception("Hand is full");
         }
@@ -61,10 +69,10 @@ namespace PokerBot
         /// Clear player hand
         /// </summary>
         /// <returns>Players hand</returns>
-        public Tuple<Card, Card> Clear()
+        public Tuple<Card, Card> ClearHand()
         {
-            Tuple<Card, Card> temp = Hand;
-            Hand = null;
+            Tuple<Card, Card> temp = Cards;
+            Cards = null;
             return temp;
         }
     }

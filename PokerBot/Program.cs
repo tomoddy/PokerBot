@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            TexasHoldEm game = new TexasHoldEm(4, 2000);
+            TexasHoldEm game = new(4, 2000);
             game.Start();
         }
     }
