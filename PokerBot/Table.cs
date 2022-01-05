@@ -75,7 +75,7 @@ namespace PokerBot
         {
             List<Card> retVal = new(Cards);
             retVal.RemoveAll(card => card == null);
-            return $"({string.Join(", ", retVal)})";
+            return Helper.FormatList(retVal);
         }
 
         /// <summary>

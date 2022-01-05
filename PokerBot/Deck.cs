@@ -90,7 +90,7 @@ namespace PokerBot
         /// <returns>Object as string</returns>
         public override string ToString()
         {
-            return $"({string.Join(", ", Cards)})";
+            return Helper.FormatList(Cards);
         }
     }
 }

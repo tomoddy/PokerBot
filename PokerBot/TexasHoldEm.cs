@@ -54,9 +54,6 @@ namespace PokerBot
             // River
             Table.AddRiver(Deck.Draw());
             PrintHands();
-
-            // Hand hand = new Hand(Players[0].GetHand(), Table);
-            // Console.WriteLine(hand.Ranking);
         }
 
         public void Deal()
@@ -68,7 +65,7 @@ namespace PokerBot
 
         public void PrintHands()
         {
-            Console.WriteLine($"({string.Join(", ", Table.Cards)})");
+            Console.WriteLine(Helper.FormatList(Table.Cards));
             foreach (Player player in Players)
             {
                 Hand hand = new(player, Table);
