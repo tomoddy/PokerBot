@@ -73,7 +73,7 @@ namespace PokerBot
         /// <returns>Object as string</returns>
         public override string ToString()
         {
-            List<Card> retVal = new List<Card>(Cards);
+            List<Card> retVal = new(Cards);
             retVal.RemoveAll(card => card == null);
             return $"({string.Join(", ", retVal)})";
         }

@@ -21,7 +21,7 @@ namespace PokerBot.Tests
         [Test()]
         public void ShuffleTest()
         {
-            Deck copy = new Deck(Deck);
+            Deck copy = new(Deck);
             Deck.Shuffle();
             Assert.False(Deck.Draw().Equals(copy.Draw()));
         }
@@ -47,7 +47,7 @@ namespace PokerBot.Tests
         [Test()]
         public void ToStringTest()
         {
-            List<Card> deck = new List<Card>();
+            List<Card> deck = new();
             for (int i = 0; i < Deck.DECK_SIZE; i++)
                 deck.Add(Deck.Draw());
 

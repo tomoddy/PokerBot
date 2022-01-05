@@ -24,7 +24,7 @@ namespace PokerBot
         /// <param name="x">First card</param>
         /// <param name="y">Second card</param>
         /// <returns>True if equal, false otherwise</returns>
-        public bool EqualsWithPosition(Card x, Card y)
+        public static bool EqualsWithPosition(Card x, Card y)
         {
             return x.Rank == y.Rank && x.Suit == y.Suit && x.Position == y.Position;
         }

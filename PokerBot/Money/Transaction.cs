@@ -45,15 +45,12 @@ namespace PokerBot.Money
         /// <returns>Object as string</returns>
         public override string ToString()
         {
-            switch (Type)
+            return Type switch
             {
-                case TransactionType.Give:
-                    return $"+{Value}";
-                case TransactionType.Take:
-                    return $"-{Value}";
-                default:
-                    throw new Exception($"Invalid type \"{Type}\"");
-            }
+                TransactionType.Give => $"+{Value}",
+                TransactionType.Take => $"-{Value}",
+                _ => throw new Exception($"Invalid type \"{Type}\""),
+            };
         }
     }
 }

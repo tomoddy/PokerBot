@@ -2,8 +2,14 @@
 
 namespace PokerBot.Hands
 {
-    class HighCard : Ranking, IRanking
+    /// <summary>
+    /// High card object
+    /// </summary>
+    class HighCard : IRanking
     {
+        /// <summary>
+        /// Hand strength
+        /// </summary>
         public Strength Strength => Strength.HighCard;
     }
 }

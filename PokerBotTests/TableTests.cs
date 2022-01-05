@@ -39,9 +39,22 @@ namespace PokerBot.Tests
             Assert.DoesNotThrow(() => Table.AddFlop(Suit.Clubs, Rank.Ace, Suit.Diamonds, Rank.Ace, Suit.Hearts, Rank.Ace));
             Assert.Throws<Exception>(() => Table.AddFlop(Suit.Clubs, Rank.Ace, Suit.Diamonds, Rank.Ace, Suit.Hearts, Rank.Ace));
 
-            Assert.IsTrue(new Card(Suit.Clubs, Rank.Ace, Position.Null).Equals(Table.Flop[0]));
-            Assert.IsTrue(new Card(Suit.Diamonds, Rank.Ace, Position.Null).Equals(Table.Flop[1]));
-            Assert.IsTrue(new Card(Suit.Hearts, Rank.Ace, Position.Null).Equals(Table.Flop[2]));
+            Assert.IsTrue(new Card(Suit.Clubs, Rank.Ace, Position.Flop).EqualsWithPosition(Table.Flop[0]));
+            Assert.IsTrue(new Card(Suit.Diamonds, Rank.Ace, Position.Flop).EqualsWithPosition(Table.Flop[1]));
+            Assert.IsTrue(new Card(Suit.Hearts, Rank.Ace, Position.Flop).EqualsWithPosition(Table.Flop[2]));
+        }
+
+        [Test()]
+        public void AddFlopTestOverload()
+        {
+            Assert.IsEmpty(Table.Cards);
+
+            Assert.DoesNotThrow(() => Table.AddFlop(new(Suit.Clubs, Rank.Ace, Position.Flop), new(Suit.Diamonds, Rank.Ace, Position.Flop), new(Suit.Hearts, Rank.Ace, Position.Flop)));
+            Assert.Throws<Exception>(() => Table.AddFlop(new(Suit.Clubs, Rank.Ace, Position.Flop), new(Suit.Diamonds, Rank.Ace, Position.Flop), new(Suit.Hearts, Rank.Ace, Position.Flop)));
+
+            Assert.IsTrue(new Card(Suit.Clubs, Rank.Ace, Position.Flop).EqualsWithPosition(Table.Flop[0]));
+            Assert.IsTrue(new Card(Suit.Diamonds, Rank.Ace, Position.Flop).EqualsWithPosition(Table.Flop[1]));
+            Assert.IsTrue(new Card(Suit.Hearts, Rank.Ace, Position.Flop).EqualsWithPosition(Table.Flop[2]));
         }
 
         [Test()]
@@ -53,7 +66,20 @@ namespace PokerBot.Tests
             Assert.DoesNotThrow(() => Table.AddTurn(Suit.Spades, Rank.Ace));
             Assert.Throws<Exception>(() => Table.AddTurn(Suit.Clubs, Rank.King));
 
-            Assert.IsTrue(new Card(Suit.Spades, Rank.Ace, Position.Null).Equals(Table.Turn));
+            Assert.IsTrue(new Card(Suit.Spades, Rank.Ace, Position.Turn).EqualsWithPosition(Table.Turn));
+            Assert.IsNull(Table.River);
+        }
+
+        [Test()]
+        public void AddTurnTestOverload()
+        {
+            Table.AddFlop(Suit.Clubs, Rank.Ace, Suit.Diamonds, Rank.Ace, Suit.Hearts, Rank.Ace);
+            Assert.IsNull(Table.Turn);
+
+            Assert.DoesNotThrow(() => Table.AddTurn(new Card(Suit.Spades, Rank.Ace, Position.Turn)));
+            Assert.Throws<Exception>(() => Table.AddTurn(new Card(Suit.Spades, Rank.Ace, Position.Turn)));
+
+            Assert.IsTrue(new Card(Suit.Spades, Rank.Ace, Position.Turn).EqualsWithPosition(Table.Turn));
             Assert.IsNull(Table.River);
         }
 
@@ -67,28 +93,20 @@ namespace PokerBot.Tests
             Assert.DoesNotThrow(() => Table.AddRiver(Suit.Clubs, Rank.King));
             Assert.Throws<Exception>(() => Table.AddRiver(Suit.Clubs, Rank.King));
 
-            Assert.IsTrue(new Card(Suit.Clubs, Rank.King, Position.Null).Equals(Table.River));
+            Assert.IsTrue(new Card(Suit.Clubs, Rank.King, Position.River).EqualsWithPosition(Table.River));
         }
 
         [Test()]
-        [Ignore("")]
-        public void AddFlopTest1()
+        public void AddRiverTestOverload()
         {
-            Assert.Fail();
-        }
+            Table.AddFlop(Suit.Clubs, Rank.Ace, Suit.Diamonds, Rank.Ace, Suit.Hearts, Rank.Ace);
+            Table.AddTurn(Suit.Spades, Rank.Ace);
+            Assert.IsNull(Table.River);
 
-        [Test()]
-        [Ignore("")]
-        public void AddTurnTest1()
-        {
-            Assert.Fail();
-        }
+            Assert.DoesNotThrow(() => Table.AddRiver(new Card(Suit.Clubs, Rank.King, Position.River)));
+            Assert.Throws<Exception>(() => Table.AddRiver(Suit.Clubs, Rank.King));
 
-        [Test()]
-        [Ignore("")]
-        public void AddRiverTest1()
-        {
-            Assert.Fail();
+            Assert.IsTrue(new Card(Suit.Clubs, Rank.King, Position.River).EqualsWithPosition(Table.River));
         }
     }
 }

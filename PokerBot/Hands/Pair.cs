@@ -2,8 +2,14 @@
 
 namespace PokerBot.Hands
 {
-    class Pair : Ranking, IRanking
+    /// <summary>
+    /// Pair object
+    /// </summary>
+    class Pair : IRanking
     {
+        /// <summary>
+        /// Hand strength
+        /// </summary>
         public Strength Strength => Strength.Pair;
     }
 }

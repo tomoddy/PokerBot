@@ -14,7 +14,7 @@ namespace PokerBot.Tests
         [TestCaseSource(typeof(CardData), nameof(CardData.EqualsWithPositionData))]
         public bool EqualsWithPositionTest(Card x, Card y)
         {
-            return new CardsComparer().EqualsWithPosition(x, y);
+            return CardsComparer.EqualsWithPosition(x, y);
         }
     }
 }

@@ -92,7 +92,7 @@ namespace PokerBot.Tests
 
     class HandData
     {
-        public static IEnumerable RankingData
+        public static IEnumerable StrengthData
         {
             get
             {
@@ -116,7 +116,7 @@ namespace PokerBot.Tests
 
         private static Table GetTable(Suit table1S, Rank table1R, Suit table2S, Rank table2R, Suit table3S, Rank table3R, Suit table4S, Rank table4R, Suit table5S, Rank table5R)
         {
-            Table retVal = new Table();
+            Table retVal = new();
             retVal.AddFlop(table1S, table1R, table2S, table2R, table3S, table3R);
             retVal.AddTurn(table4S, table4R);
             retVal.AddRiver(table5S, table5R);

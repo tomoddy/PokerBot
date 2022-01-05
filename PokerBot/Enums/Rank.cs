@@ -34,37 +34,23 @@ namespace PokerBot.Enums
         /// <returns>String symbol</returns>
         public static string Symbol(this Rank rank)
         {
-            switch (rank)
+            return rank switch
             {
-                case Rank.Ace:
-                    return "A";
-                case Rank.Two:
-                    return "2";
-                case Rank.Three:
-                    return "3";
-                case Rank.Four:
-                    return "4";
-                case Rank.Five:
-                    return "5";
-                case Rank.Six:
-                    return "6";
-                case Rank.Seven:
-                    return "7";
-                case Rank.Eight:
-                    return "8";
-                case Rank.Nine:
-                    return "9";
-                case Rank.Ten:
-                    return "10";
-                case Rank.Jack:
-                    return "J";
-                case Rank.Queen:
-                    return "Q";
-                case Rank.King:
-                    return "K";
-                default:
-                    throw new Exception($"Invalid rank \"{rank}\"");
-            }
+                Rank.Ace => "A",
+                Rank.Two => "2",
+                Rank.Three => "3",
+                Rank.Four => "4",
+                Rank.Five => "5",
+                Rank.Six => "6",
+                Rank.Seven => "7",
+                Rank.Eight => "8",
+                Rank.Nine => "9",
+                Rank.Ten => "10",
+                Rank.Jack => "J",
+                Rank.Queen => "Q",
+                Rank.King => "K",
+                _ => throw new Exception($"Invalid rank \"{rank}\""),
+            };
         }
     }
 }

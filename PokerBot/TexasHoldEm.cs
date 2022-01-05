@@ -72,7 +72,7 @@ namespace PokerBot
             foreach (Player player in Players)
             {
                 Hand hand = new(player, Table);
-                Console.WriteLine($"{player.Name} - {player.GetHand()} {hand.Ranking.Strength}");
+                Console.WriteLine($"{player.Name} - {player.GetHand()} ({hand.Ranking.Text})");
             }
         }
 

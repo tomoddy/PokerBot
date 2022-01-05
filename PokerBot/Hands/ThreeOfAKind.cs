@@ -2,8 +2,14 @@
 
 namespace PokerBot.Hands
 {
-    class ThreeOfAKind : Ranking, IRanking
+    /// <summary>
+    /// Three of a kind object
+    /// </summary>
+    class ThreeOfAKind: IRanking
     {
+        /// <summary>
+        /// Hand strength
+        /// </summary>
         public Strength Strength => Strength.ThreeOfAKind;
     }
 }

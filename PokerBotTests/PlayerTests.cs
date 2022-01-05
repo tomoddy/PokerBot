@@ -1,5 +1,4 @@
-﻿using PokerBot;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using PokerBot.Enums;
 using System;
 

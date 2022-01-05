@@ -25,19 +25,14 @@ namespace PokerBot.Enums
         /// <returns>String symbol</returns>
         public static string Symbol(this Suit suit)
         {
-            switch (suit)
+            return suit switch
             {
-                case Suit.Clubs:
-                    return "♣";
-                case Suit.Diamonds:
-                    return "♦";
-                case Suit.Hearts:
-                    return "♥";
-                case Suit.Spades:
-                    return "♠";
-                default:
-                    throw new Exception($"Invalid suit \"{suit}\"");
-            }
+                Suit.Clubs => "♣",
+                Suit.Diamonds => "♦",
+                Suit.Hearts => "♥",
+                Suit.Spades => "♠",
+                _ => throw new Exception($"Invalid suit \"{suit}\""),
+            };
         }
     }
 }

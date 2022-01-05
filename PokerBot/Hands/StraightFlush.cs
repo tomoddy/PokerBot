@@ -2,8 +2,14 @@
 
 namespace PokerBot.Hands
 {
-    class StraightFlush : Ranking, IRanking
+    /// <summary>
+    /// Straight flush object
+    /// </summary>
+    class StraightFlush: IRanking
     {
+        /// <summary>
+        /// Hand strength
+        /// </summary>
         public Strength Strength => Strength.StraightFlush;
     }
 }

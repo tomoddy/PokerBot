@@ -13,7 +13,7 @@ namespace PokerBot
         public const int DECK_SIZE = 52;
 
         // Random object
-        private static readonly Random Rand = new Random();
+        private static readonly Random Rand = new();
 
         /// <summary>
         /// Cards in deck

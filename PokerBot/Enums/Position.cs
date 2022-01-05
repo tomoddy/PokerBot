@@ -22,7 +22,7 @@ namespace PokerBot.Enums
     public static class PositionMethods
     {
         // Random object
-        private static readonly Random Rand = new Random();
+        private static readonly Random Rand = new();
 
         /// <summary>
         /// Create random position
