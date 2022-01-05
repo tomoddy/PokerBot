@@ -1,8 +1,7 @@
 ﻿using NUnit.Framework;
-using PokerBot;
 using System.Collections.Generic;
 
-namespace PokerBotTests
+namespace PokerBot.Tests
 {
     [TestFixture]
     public class HelperTests

@@ -5,7 +5,7 @@ using System;
 namespace PokerBot.Tests
 {
     [TestFixture]
-    public class StrengthTests
+    public class HandTests
     {
         [TestCaseSource(typeof(HandData), nameof(HandData.StrengthData))]
         public Strength StrengthTest(Tuple<Card, Card> player, Table table)
