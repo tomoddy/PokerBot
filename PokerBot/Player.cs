@@ -43,10 +43,10 @@ namespace PokerBot
         }
 
         /// <summary>
-        /// Getter for hand
+        /// Getter for cards
         /// </summary>
         /// <returns>Hand tuple</returns>
-        public Tuple<Card, Card> GetHand()
+        public Tuple<Card, Card> GetCards()
         {
             return Cards;
         }
@@ -66,14 +66,24 @@ namespace PokerBot
         }
 
         /// <summary>
-        /// Clear player hand
+        /// Clear player cards
         /// </summary>
         /// <returns>Players hand</returns>
-        public Tuple<Card, Card> ClearHand()
+        public Tuple<Card, Card> ClearCards()
         {
             Tuple<Card, Card> temp = Cards;
             Cards = null;
             return temp;
+        }
+
+        /// <summary>
+        /// Get player hand combined with table
+        /// </summary>
+        /// <param name="table">Table</param>
+        /// <returns>Hand</returns>
+        public Hand GetHand(Table table)
+        {
+            return new Hand(this, table);
         }
     }
 }

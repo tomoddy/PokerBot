@@ -34,47 +34,54 @@ namespace PokerBot.Tests
             Assert.AreEqual(ID, Player.Id);
             Assert.AreEqual(NAME, Player.Name);
             Assert.AreEqual(STACK, Player.Wallet.Stack);
-            Assert.IsNull(Player.GetHand());
+            Assert.IsNull(Player.GetCards());
         }
 
         [Test()]
         public void GiveCardTest()
         {
-            Assert.IsNull(Player.GetHand());
+            Assert.IsNull(Player.GetCards());
             Player.GiveCard(X);
 
-            Assert.IsTrue(Player.GetHand().Item1.Equals(X));
-            Assert.IsNull(Player.GetHand().Item2);
+            Assert.IsTrue(Player.GetCards().Item1.Equals(X));
+            Assert.IsNull(Player.GetCards().Item2);
 
             Player.GiveCard(Y);
-            Assert.IsTrue(Player.GetHand().Item1.Equals(X));
-            Assert.IsTrue(Player.GetHand().Item2.Equals(Y));
+            Assert.IsTrue(Player.GetCards().Item1.Equals(X));
+            Assert.IsTrue(Player.GetCards().Item2.Equals(Y));
 
             Assert.Throws<Exception>(() => Player.GiveCard(Z));
         }
 
         [Test()]
-        public void ClearHandTest()
+        public void ClearCardsTest()
         {
             Player.GiveCard(X);
             Player.GiveCard(Y);
 
-            Tuple<Card, Card> hand = Player.ClearHand();
+            Tuple<Card, Card> hand = Player.ClearCards();
             Assert.IsTrue(hand.Item1.Equals(X));
             Assert.IsTrue(hand.Item2.Equals(Y));
 
-            Assert.IsNull(Player.GetHand());
+            Assert.IsNull(Player.GetCards());
         }
 
         [Test()]
-        public void GetHandTest()
+        public void GetCardsTest()
         {
             Player.GiveCard(X);
             Player.GiveCard(Y);
 
-            Tuple<Card, Card> hand = Player.GetHand();
+            Tuple<Card, Card> hand = Player.GetCards();
             Assert.IsTrue(hand.Item1.Equals(X));
             Assert.IsTrue(hand.Item2.Equals(Y));
+        }
+
+        [Test()]
+        [Ignore("Incomplete")]
+        public void GetHandTest()
+        {
+            
         }
     }
 }

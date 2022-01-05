@@ -281,11 +281,11 @@ namespace PokerBot
         /// <param name="table">Cards from table</param>
         public Hand(Player player, Table table)
         {
-            Tuple<Card, Card> hand = player.GetHand();
+            Tuple<Card, Card> cards = player.GetCards();
             Cards = new List<Card>
             {
-                hand.Item1,
-                hand.Item2
+                cards.Item1,
+                cards.Item2
             };
             Cards.AddRange(table.Cards);
             Cards = Cards.OrderBy(card => card.Rank).ThenBy(card => card.Suit).ToList();

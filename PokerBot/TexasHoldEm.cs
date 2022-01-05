@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PokerBot
 {
@@ -66,10 +67,10 @@ namespace PokerBot
         public void PrintHands()
         {
             Console.WriteLine(Helper.FormatList(Table.Cards));
-            foreach (Player player in Players)
+            foreach (Player player in Players.OrderByDescending(player => player.GetHand(Table).Ranking.Strength))
             {
                 Hand hand = new(player, Table);
-                Console.WriteLine($"{player.Name} - {player.GetHand()} ({hand.Ranking.Text})");
+                Console.WriteLine($"{player.Name} - {player.GetCards()} ({hand.Ranking.Text})");
             }
         }
 
